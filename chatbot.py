@@ -3,8 +3,15 @@ from openai import OpenAI
 from rag_helper import get_context
 from analytics import log_question
 
+# Works both locally and on Streamlit Cloud
+try:
+    import streamlit as st
+    groq_key = st.secrets.get("GROQ_API_KEY", os.environ.get("GROQ_API_KEY"))
+except Exception:
+    groq_key = os.environ.get("GROQ_API_KEY")
+
 client = OpenAI(
-    api_key=os.environ.get("GROQ_API_KEY"),
+    api_key=groq_key,
     base_url="https://api.groq.com/openai/v1"
 )
 

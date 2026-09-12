@@ -2,60 +2,93 @@ import streamlit as st
 from chatbot import answer_question
 from analytics import get_stats, clear_logs
 
-# Custom styling
-st.markdown("""
-<style>
-.main-title {
-    text-align: center;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.subtitle {
-    text-align: center;
-    font-size: 18px;
-}
-
-.info-box {
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #dddddd;
-    margin-bottom: 10px;
-}
-</style>
-""", unsafe_allow_html=True)
-
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Sindhi College Chatbot",
     page_icon="🎓",
     layout="centered"
 )
 
-st.image("logo.jpg", width=250)
+# ---------------- CUSTOM CSS ----------------
+st.markdown("""
+<style>
+/* Hide Streamlit default footer */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
 
-st.markdown(
-    '<div class="main-title">🎓 Sindhi College Chatbot</div>',
-    unsafe_allow_html=True
-)
+/* Main banner */
+.banner {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+.banner h1 {
+    font-size: 34px;
+    margin: 0;
+    color: white;
+}
+.banner p {
+    font-size: 16px;
+    margin-top: 8px;
+    color: #e0e7ff;
+}
 
-st.markdown(
-    '<div class="subtitle">AI-Powered Student Assistant</div>',
-    unsafe_allow_html=True
-)
+/* Info card */
+.card {
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 5px solid #3b82f6;
+    margin-bottom: 12px;
+}
 
-st.write(
-    "Welcome! Ask me about courses, admission, facilities, "
-    "college information, or academic topics."
-)
+/* Sidebar section titles */
+.sidebar-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #1e3a8a;
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
 
-st.divider()
+/* Quick question buttons */
+.stButton > button {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #1e293b;
+    font-weight: 500;
+    padding: 10px 6px;
+    transition: 0.2s;
+}
+.stButton > button:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e3a8a;
+}
 
+/* Chat messages */
+.stChatMessage {
+    border-radius: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------- BANNER ----------------
+st.markdown("""
+<div class="banner">
+    <h1>🎓 Sindhi College Chatbot</h1>
+    <p>AI-Powered Student Assistant • Kempapura, Hebbal, Bengaluru</p>
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------- SIDEBAR ----------------
 with st.sidebar:
-    st.header("🏫 Sindhi College")
-
-    st.write("### College Information")
+    st.markdown('<div class="sidebar-title">🏫 College Information</div>', unsafe_allow_html=True)
     st.write("📍 #33/2B, Kempapura, Hebbal, Bengaluru - 560024")
     st.write("📞 080 - 2363 7543 / 44")
     st.write("📧 mail@sindhicollege.com")
@@ -65,20 +98,14 @@ with st.sidebar:
 
     st.divider()
 
-    st.write("### 📚 I Can Help With")
-    st.write("• Courses")
-    st.write("• Admission")
-    st.write("• Documents")
-    st.write("• Facilities")
-    st.write("• College Location")
-    st.write("• Python")
-    st.write("• DBMS")
-    st.write("• Java")
-    st.write("• AI / ML")
+    st.markdown('<div class="sidebar-title">📚 I Can Help With</div>', unsafe_allow_html=True)
+    st.write("• Courses • Admission • Documents")
+    st.write("• Facilities • Location • Contact")
+    st.write("• Python • DBMS • Java • AI / ML")
 
     st.divider()
 
-    # Download chat history button
+    # Download chat history
     if st.session_state.get("messages"):
         chat_text = ""
         for msg in st.session_state.messages:
@@ -94,9 +121,9 @@ with st.sidebar:
 
     st.caption("Sindhi College Student Assistant")
 
-    # ---------------- ADMIN DASHBOARD ----------------
+    # ---------------- ADMIN ----------------
     st.divider()
-    st.write("### 🔐 Admin")
+    st.markdown('<div class="sidebar-title">🔐 Admin</div>', unsafe_allow_html=True)
 
     admin_password = st.text_input(
         "Enter admin password",
@@ -106,7 +133,6 @@ with st.sidebar:
 
     if admin_password == "admin123":
         total, top = get_stats()
-
         st.success(f"Total questions asked: {total}")
 
         if top:
@@ -120,176 +146,128 @@ with st.sidebar:
             clear_logs()
             st.success("Log cleared.")
 
-
-# ---------------- STUDENT DASHBOARD ----------------
-st.subheader("🎓 Student Dashboard")
-
-dash1, dash2, dash3 = st.columns(3)
-
-with dash1:
-    st.info("📚\n\n**Academic Help**\n\nPython • Java • DBMS • AI")
-
-with dash2:
-    st.info("🏫\n\n**College Help**\n\nCourses • Admission • Facilities")
-
-with dash3:
-    st.info("💬\n\n**Chat Assistant**\n\nAsk your questions anytime")
-
-st.divider()
-
+# ---------------- WELCOME CARD ----------------
+st.markdown("""
+<div class="card">
+    <b>Welcome!</b> Ask me about courses, admission, facilities,
+    staff, or any academic topic. I use a combination of offline
+    rules and AI to give you accurate answers.
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------- CHAT HISTORY ----------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display previous messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-if st.button("🧹 Clear Conversation"):
-    st.session_state.messages = []
-    st.rerun()
-
+col_clear, _ = st.columns([1, 3])
+with col_clear:
+    if st.button("🧹 Clear Conversation"):
+        st.session_state.messages = []
+        st.rerun()
 
 # ---------------- QUICK QUESTIONS ----------------
 st.subheader("💡 Quick Questions")
 
-col1, col2, col3 = st.columns(3)
-
-with col1:
+row1 = st.columns(3)
+with row1[0]:
     if st.button("📚 Courses"):
-        question = "What courses are available?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What courses are available?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
-with col2:
+with row1[1]:
     if st.button("📍 Location"):
-        question = "Where is Sindhi College located?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "Where is Sindhi College located?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
-with col3:
+with row1[2]:
     if st.button("🎓 Admission"):
-        question = "What is the admission eligibility?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What is the admission eligibility?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
 
-
-col4, col5, col6 = st.columns(3)
-
-with col4:
+row2 = st.columns(3)
+with row2[0]:
     if st.button("📄 Documents"):
-        question = "What documents are required?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What documents are required?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
-with col5:
+with row2[1]:
     if st.button("🏫 Facilities"):
-        question = "What facilities are available?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What facilities are available?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
+        st.rerun()
+with row2[2]:
+    if st.button("👨‍🏫 Principal"):
+        q = "Who is the principal?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
 
-with col6:
-    if st.button("💻 BCA"):
-        question = "Tell me about BCA"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+row3 = st.columns(3)
+with row3[0]:
+    if st.button("📖 Librarian"):
+        q = "Who is the librarian?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
-
-col7, col8, col9 = st.columns(3)
-
-with col7:
-    if st.button("🗄️ DBMS"):
-        question = "What is DBMS?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
-        st.rerun()
-
-with col8:
+with row3[1]:
     if st.button("☕ Java"):
-        question = "What is Java?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What is Java?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
-with col9:
+with row3[2]:
     if st.button("🤖 AI"):
-        question = "What is Artificial Intelligence?"
-        answer = answer_question(question)
-        st.session_state.messages.append(
-            {"role": "user", "content": question}
-        )
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer}
-        )
+        q = "What is Artificial Intelligence?"
+        a = answer_question(q)
+        st.session_state.messages += [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a}
+        ]
         st.rerun()
-
 
 # ---------------- CHAT INPUT ----------------
-question = st.chat_input(
-    "💬 Ask me anything about Sindhi College..."
-)
+question = st.chat_input("💬 Ask me anything about Sindhi College...")
 
 if question:
-
-    # Add student question
-    st.session_state.messages.append(
-        {"role": "user", "content": question}
-    )
-
-    # Get chatbot answer
+    st.session_state.messages.append({"role": "user", "content": question})
     answer = answer_question(question)
-
-    # Add chatbot answer
-    st.session_state.messages.append(
-        {"role": "assistant", "content": answer}
-    )
-
+    st.session_state.messages.append({"role": "assistant", "content": answer})
     st.rerun()
+
+# ---------------- FOOTER ----------------
+st.divider()
+st.caption("© 2026 Sindhi College Chatbot • Built with Streamlit + Groq AI")

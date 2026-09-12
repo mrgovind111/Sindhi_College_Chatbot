@@ -51,10 +51,14 @@ def answer_question(question):
     q = q.replace("where can i find the college", "location")
     q = q.replace("what courses are available", "courses")
 
-    # College questions
+    # College question
     if "where" in q or "location" in q or "address" in q or "located" in q:
         last_topic = "college"
-        return "Sindhi College is located at 33/2B, Kempapura, Hebbal, Bengaluru - 560024."
+        return (
+            "Sindhi College is located at:\n\n"
+            "📍 #33/2B, Kempapura, Hebbal, Bengaluru - 560024\n\n"
+            "🗺️ [Open in Google Maps](https://maps.app.goo.gl/xuhmG8ZR3Wk6v2HS7)"
+        )
 
     elif "course" in q or "courses" in q or "program" in q or "programs" in q:
         last_topic = "college"

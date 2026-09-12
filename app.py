@@ -1,6 +1,9 @@
 import streamlit as st
 from chatbot import answer_question
-from analytics import get_stats, clear_logs
+from analytics import (
+    get_stats, clear_logs,
+    log_feedback, get_feedback_stats, clear_feedback
+)
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
@@ -146,6 +149,22 @@ with st.sidebar:
             clear_logs()
             st.success("Log cleared.")
 
+        st.divider()
+        st.markdown("**📊 Feedback Stats**")
+
+        fb_total, fb_up, fb_down = get_feedback_stats()
+        st.write(f"Total feedback: {fb_total}")
+        st.write(f"👍 Helpful: {fb_up}")
+        st.write(f"👎 Not helpful: {fb_down}")
+
+        if fb_total > 0:
+            percent = round((fb_up / fb_total) * 100, 1)
+            st.write(f"Helpful rate: {percent}%")
+
+        if st.button("🗑️ Clear Feedback"):
+            clear_feedback()
+            st.success("Feedback cleared.")
+
 # ---------------- WELCOME CARD ----------------
 st.markdown("""
 <div class="card">
@@ -168,6 +187,32 @@ with col_clear:
     if st.button("🧹 Clear Conversation"):
         st.session_state.messages = []
         st.rerun()
+
+# ---------------- FEEDBACK ----------------
+if st.session_state.messages:
+    last_user = None
+    last_bot = None
+    for msg in reversed(st.session_state.messages):
+        if msg["role"] == "assistant" and last_bot is None:
+            last_bot = msg["content"]
+        elif msg["role"] == "user" and last_user is None:
+            last_user = msg["content"]
+        if last_user and last_bot:
+            break
+
+    if last_user and last_bot:
+        st.markdown("**Was the last answer helpful?**")
+        fb1, fb2, _ = st.columns([1, 1, 4])
+
+        with fb1:
+            if st.button("👍 Helpful", key="fb_up"):
+                log_feedback(last_user, last_bot, "up")
+                st.success("Thanks for your feedback!")
+
+        with fb2:
+            if st.button("👎 Not helpful", key="fb_down"):
+                log_feedback(last_user, last_bot, "down")
+                st.success("Thanks — we will improve.")
 
 # ---------------- QUICK QUESTIONS ----------------
 st.subheader("💡 Quick Questions")

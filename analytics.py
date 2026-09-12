@@ -2,40 +2,39 @@ import json
 import os
 
 LOG_FILE = "data/question_log.json"
+FEEDBACK_FILE = "data/feedback_log.json"
 
 
-def log_question(question):
-    """Save a question to the log file."""
+def _ensure_data_dir():
     if not os.path.exists("data"):
         os.makedirs("data")
 
-    if not os.path.exists(LOG_FILE):
-        with open(LOG_FILE, "w", encoding="utf-8") as f:
-            json.dump([], f)
 
-    with open(LOG_FILE, "r", encoding="utf-8") as f:
+def _load_json(path):
+    if not os.path.exists(path):
+        return []
+    with open(path, "r", encoding="utf-8") as f:
         try:
-            logs = json.load(f)
+            return json.load(f)
         except json.JSONDecodeError:
-            logs = []
+            return []
 
+
+def _save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+
+# ---------------- Question logging ----------------
+def log_question(question):
+    _ensure_data_dir()
+    logs = _load_json(LOG_FILE)
     logs.append(question.lower().strip())
-
-    with open(LOG_FILE, "w", encoding="utf-8") as f:
-        json.dump(logs, f, indent=2)
+    _save_json(LOG_FILE, logs)
 
 
 def get_stats():
-    """Return total count and top questions."""
-    if not os.path.exists(LOG_FILE):
-        return 0, []
-
-    with open(LOG_FILE, "r", encoding="utf-8") as f:
-        try:
-            logs = json.load(f)
-        except json.JSONDecodeError:
-            logs = []
-
+    logs = _load_json(LOG_FILE)
     total = len(logs)
 
     counts = {}
@@ -47,6 +46,29 @@ def get_stats():
 
 
 def clear_logs():
-    """Wipe all logged questions."""
-    with open(LOG_FILE, "w", encoding="utf-8") as f:
-        json.dump([], f)
+    _save_json(LOG_FILE, [])
+
+
+# ---------------- Feedback ----------------
+def log_feedback(question, answer, rating):
+    """rating: 'up' or 'down'"""
+    _ensure_data_dir()
+    entries = _load_json(FEEDBACK_FILE)
+    entries.append({
+        "question": question,
+        "answer": answer,
+        "rating": rating
+    })
+    _save_json(FEEDBACK_FILE, entries)
+
+
+def get_feedback_stats():
+    entries = _load_json(FEEDBACK_FILE)
+    total = len(entries)
+    up = sum(1 for e in entries if e.get("rating") == "up")
+    down = sum(1 for e in entries if e.get("rating") == "down")
+    return total, up, down
+
+
+def clear_feedback():
+    _save_json(FEEDBACK_FILE, [])

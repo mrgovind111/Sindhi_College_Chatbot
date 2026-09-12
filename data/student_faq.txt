@@ -1,0 +1,59 @@
+What is Python?
+Python is a high-level programming language used for developing applications, websites, automation and data analysis.
+
+What is DBMS?
+DBMS stands for Database Management System. It is software used to store, manage and retrieve data from databases.
+
+What is SQL?
+SQL stands for Structured Query Language. It is used to create, read, update and delete data in databases.
+
+What is Java?
+Java is a high-level, object-oriented programming language used to develop applications.
+
+What is Artificial Intelligence?
+Artificial Intelligence (AI) is a technology that enables computers to perform tasks that normally require human intelligence.
+
+What is Machine Learning?
+Machine Learning is a branch of AI where computers learn patterns from data and make predictions or decisions.
+
+What is HTML?
+HTML stands for HyperText Markup Language. It is used to create the structure of web pages.
+
+What is CSS?
+CSS stands for Cascading Style Sheets. It is used to style and design web pages.
+
+What is an Algorithm?
+An algorithm is a step-by-step procedure used to solve a problem.
+
+What is a Computer Network?
+A computer network is a group of connected computers that communicate and share resources.
+
+What is Normalization?
+Normalization is a database process used to organize data and reduce data redundancy.
+
+What is an Operating System?
+An operating system is system software that manages computer hardware and software resources.
+
+What is OOP?
+OOP stands for Object-Oriented Programming. It is a programming approach based on objects and classes.
+
+What is Data Structure?
+A data structure is a way of organizing and storing data so that it can be used efficiently.
+
+What is Cyber Security?
+Cyber security is the practice of protecting computers, networks and data from unauthorized access and cyber attacks.
+
+What is BCA?
+BCA stands for Bachelor of Computer Applications. It is an undergraduate degree related to computer applications and information technology.
+
+What are the subjects in BCA?
+BCA commonly includes subjects such as Programming, DBMS, Computer Networks, Operating Systems, Java, Python, Web Technology and Software Engineering.
+
+What is a Database?
+A database is an organized collection of data that can be stored, managed and retrieved easily.
+
+What is the difference between HTML and CSS?
+HTML creates the structure of a webpage, while CSS controls its design, layout and appearance.
+
+What is the difference between Java and Python?
+Java is a strongly typed object-oriented programming language, while Python is a simpler high-level programming language known for easy syntax.

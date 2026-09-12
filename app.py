@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from chatbot import answer_question
 from analytics import (
     get_stats, clear_logs,
@@ -16,11 +17,9 @@ st.set_page_config(
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
-/* Hide Streamlit default footer */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Main banner */
 .banner {
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     padding: 30px 20px;
@@ -29,18 +28,9 @@ footer {visibility: hidden;}
     color: white;
     margin-bottom: 20px;
 }
-.banner h1 {
-    font-size: 34px;
-    margin: 0;
-    color: white;
-}
-.banner p {
-    font-size: 16px;
-    margin-top: 8px;
-    color: #e0e7ff;
-}
+.banner h1 { font-size: 34px; margin: 0; color: white; }
+.banner p { font-size: 16px; margin-top: 8px; color: #e0e7ff; }
 
-/* Info card */
 .card {
     background: #f8fafc;
     padding: 18px;
@@ -49,7 +39,6 @@ footer {visibility: hidden;}
     margin-bottom: 12px;
 }
 
-/* Sidebar section titles */
 .sidebar-title {
     font-weight: bold;
     font-size: 15px;
@@ -58,7 +47,6 @@ footer {visibility: hidden;}
     margin-bottom: 6px;
 }
 
-/* Quick question buttons */
 .stButton > button {
     width: 100%;
     border-radius: 8px;
@@ -75,10 +63,7 @@ footer {visibility: hidden;}
     color: #1e3a8a;
 }
 
-/* Chat messages */
-.stChatMessage {
-    border-radius: 10px;
-}
+.stChatMessage { border-radius: 10px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -109,7 +94,6 @@ with st.sidebar:
 
     st.divider()
 
-    # Download chat history
     if st.session_state.get("messages"):
         chat_text = ""
         for msg in st.session_state.messages:
@@ -185,6 +169,25 @@ with st.sidebar:
         if st.button("🗑️ Clear Admission Enquiries"):
             clear_admissions()
             st.success("Admission enquiries cleared.")
+
+        st.divider()
+        st.markdown("**📈 Question Analytics**")
+
+        if top:
+            df = pd.DataFrame(top, columns=["Question", "Count"])
+            st.bar_chart(df.set_index("Question"))
+        else:
+            st.info("No question data yet.")
+
+        st.markdown("**🥧 Feedback Breakdown**")
+
+        if fb_total > 0:
+            fb_df = pd.DataFrame(
+                {"Type": ["Helpful", "Not Helpful"], "Count": [fb_up, fb_down]}
+            )
+            st.bar_chart(fb_df.set_index("Type"))
+        else:
+            st.info("No feedback data yet.")
 
 # ---------------- WELCOME CARD ----------------
 st.markdown("""

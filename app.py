@@ -131,7 +131,7 @@ with st.sidebar:
         key="admin_pass"
     )
 
-    if admin_password == "admin123":
+    if admin_password == "Govind@2223":
         total, top = get_stats()
         st.success(f"Total questions asked: {total}")
 

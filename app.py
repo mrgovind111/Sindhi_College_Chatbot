@@ -2,7 +2,8 @@ import streamlit as st
 from chatbot import answer_question
 from analytics import (
     get_stats, clear_logs,
-    log_feedback, get_feedback_stats, clear_feedback
+    log_feedback, get_feedback_stats, clear_feedback,
+    log_admission, get_admissions, clear_admissions
 )
 
 # ---------------- PAGE CONFIG ----------------
@@ -165,6 +166,26 @@ with st.sidebar:
             clear_feedback()
             st.success("Feedback cleared.")
 
+        st.divider()
+        st.markdown("**📝 Admission Enquiries**")
+
+        admissions = get_admissions()
+        st.write(f"Total enquiries: {len(admissions)}")
+
+        if admissions:
+            for i, entry in enumerate(admissions[-10:], 1):
+                st.write(
+                    f"{i}. **{entry.get('name','')}** — "
+                    f"{entry.get('phone','')} — "
+                    f"{entry.get('course','')}"
+                )
+        else:
+            st.info("No enquiries yet.")
+
+        if st.button("🗑️ Clear Admission Enquiries"):
+            clear_admissions()
+            st.success("Admission enquiries cleared.")
+
 # ---------------- WELCOME CARD ----------------
 st.markdown("""
 <div class="card">
@@ -303,6 +324,50 @@ with row3[2]:
             {"role": "assistant", "content": a}
         ]
         st.rerun()
+
+# ---------------- ADMISSION ENQUIRY FORM ----------------
+st.divider()
+st.subheader("📝 Admission Enquiry")
+
+with st.form("admission_form", clear_on_submit=True):
+    col_a, col_b = st.columns(2)
+
+    with col_a:
+        name = st.text_input("Full Name *")
+        phone = st.text_input("Phone Number *")
+
+    with col_b:
+        email = st.text_input("Email (optional)")
+
+        course = st.selectbox(
+            "Course Interested In *",
+            [
+                "BCA",
+                "B.Com",
+                "BBA",
+                "B.Sc (Computer Science)",
+                "B.Sc (Electronics)",
+                "B.A. (Psychology)",
+                "B.A. (Journalism)",
+                "M.Com",
+                "MBA",
+                "Other"
+            ]
+        )
+
+    message = st.text_area("Message (optional)")
+
+    submitted = st.form_submit_button("Submit Enquiry")
+
+    if submitted:
+        if not name.strip() or not phone.strip():
+            st.error("Please fill in Name and Phone Number.")
+        else:
+            log_admission(name, phone, email, course, message)
+            st.success(
+                f"Thank you, {name}! Your enquiry has been recorded. "
+                "The college office will contact you soon."
+            )
 
 # ---------------- CHAT INPUT ----------------
 question = st.chat_input("💬 Ask me anything about Sindhi College...")

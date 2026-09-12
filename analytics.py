@@ -72,3 +72,26 @@ def get_feedback_stats():
 
 def clear_feedback():
     _save_json(FEEDBACK_FILE, [])
+# ---------------- Admission Enquiries ----------------
+ADMISSION_FILE = "data/admissions.json"
+
+
+def log_admission(name, phone, email, course, message):
+    _ensure_data_dir()
+    entries = _load_json(ADMISSION_FILE)
+    entries.append({
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "course": course,
+        "message": message
+    })
+    _save_json(ADMISSION_FILE, entries)
+
+
+def get_admissions():
+    return _load_json(ADMISSION_FILE)
+
+
+def clear_admissions():
+    _save_json(ADMISSION_FILE, [])

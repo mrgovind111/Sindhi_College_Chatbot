@@ -10,6 +10,9 @@ try:
 except Exception:
     groq_key = os.environ.get("GROQ_API_KEY")
 
+if not groq_key:
+    raise RuntimeError("GROQ_API_KEY is not set. Add it in Streamlit secrets or your environment.")
+
 client = OpenAI(
     api_key=groq_key,
     base_url="https://api.groq.com/openai/v1"

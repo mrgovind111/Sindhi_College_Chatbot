@@ -82,7 +82,7 @@ with st.sidebar:
     st.write("📞 080 - 2363 7543 / 44")
     st.write("📧 mail@sindhicollege.com")
     st.write("🌐 www.sindhicollege.com")
-    st.write("🏛️ Bangalore University")
+    st.write("🏛️ Bangalore city University")
     st.write("⭐ NAAC Accredited B++")
 
     st.divider()

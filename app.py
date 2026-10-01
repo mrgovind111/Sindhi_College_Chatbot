@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 from chatbot import answer_question
 from analytics import (
     get_stats, clear_logs,
@@ -20,6 +21,7 @@ st.markdown("""
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
+/* Animated banner */
 .banner {
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     padding: 30px 20px;
@@ -27,18 +29,49 @@ footer {visibility: hidden;}
     text-align: center;
     color: white;
     margin-bottom: 20px;
+    animation: fadeInDown 0.8s ease-in-out;
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
 }
-.banner h1 { font-size: 34px; margin: 0; color: white; }
-.banner p { font-size: 16px; margin-top: 8px; color: #e0e7ff; }
+.banner h1 {
+    font-size: 34px;
+    margin: 0;
+    color: white;
+    animation: fadeIn 1.2s ease-in-out;
+}
+.banner p {
+    font-size: 16px;
+    margin-top: 8px;
+    color: #e0e7ff;
+    animation: fadeIn 1.6s ease-in-out;
+}
 
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome card */
 .card {
     background: #f8fafc;
     padding: 18px;
     border-radius: 10px;
     border-left: 5px solid #3b82f6;
     margin-bottom: 12px;
+    animation: slideUp 0.6s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+/* Sidebar titles */
 .sidebar-title {
     font-weight: bold;
     font-size: 15px;
@@ -47,6 +80,7 @@ footer {visibility: hidden;}
     margin-bottom: 6px;
 }
 
+/* Animated buttons */
 .stButton > button {
     width: 100%;
     border-radius: 8px;
@@ -55,15 +89,25 @@ footer {visibility: hidden;}
     color: #1e293b;
     font-weight: 500;
     padding: 10px 6px;
-    transition: 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .stButton > button:hover {
     background: #eff6ff;
     border-color: #3b82f6;
     color: #1e3a8a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+.stButton > button:active {
+    transform: translateY(0);
 }
 
-.stChatMessage { border-radius: 10px; }
+/* Chat messages */
+.stChatMessage {
+    border-radius: 10px;
+    animation: slideUp 0.4s ease-in-out;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -82,7 +126,7 @@ with st.sidebar:
     st.write("📞 080 - 2363 7543 / 44")
     st.write("📧 mail@sindhicollege.com")
     st.write("🌐 www.sindhicollege.com")
-    st.write("🏛️ Bangalore city University")
+    st.write("🏛️ Bangalore City University")
     st.write("⭐ NAAC Accredited B++")
 
     st.divider()
@@ -202,9 +246,22 @@ st.markdown("""
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-for message in st.session_state.messages:
+for i, message in enumerate(st.session_state.messages):
     with st.chat_message(message["role"]):
-        st.write(message["content"])
+        # Animate only the latest assistant message
+        if (
+            message["role"] == "assistant"
+            and i == len(st.session_state.messages) - 1
+        ):
+            placeholder = st.empty()
+            typed = ""
+            for char in message["content"]:
+                typed += char
+                placeholder.markdown(typed + " ▌")
+                time.sleep(0.005)
+            placeholder.markdown(typed)
+        else:
+            st.write(message["content"])
 
 col_clear, _ = st.columns([1, 3])
 with col_clear:
@@ -377,7 +434,8 @@ question = st.chat_input("💬 Ask me anything about Sindhi College...")
 
 if question:
     st.session_state.messages.append({"role": "user", "content": question})
-    answer = answer_question(question)
+    with st.spinner("🤔 Thinking..."):
+        answer = answer_question(question)
     st.session_state.messages.append({"role": "assistant", "content": answer})
     st.rerun()
 

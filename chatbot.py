@@ -109,7 +109,88 @@ Admission is generally merit-based."""
         last_topic = "college"
         return "Sindhi College is NAAC Accredited with B++ Grade."
 
-    # Student FAQ questions
+    # ---------- STAFF RULES (must come BEFORE BCA rule) ----------
+    elif ("hod" in q or "head" in q) and "bca" in q:
+        last_topic = "staff"
+        return """The HOD of BCA at Sindhi College is:
+
+• Prof. Radhika E. K. — HOD & Associate Professor (MS (IT), Ph.D)
+• Prof. Priya Hari — HOD & Associate Professor (MCA)"""
+
+    elif ("hod" in q or "head" in q) and "commerce" in q:
+        last_topic = "staff"
+        return """The HOD of Commerce at Sindhi College is:
+
+• Prof. Jayashree Tambad — HOD & Associate Professor (M.Com, M.Phil)
+• Dr. Kariyanna S. — HOD & Professor (MA, B.Ed, NET, Ph.D)"""
+
+    elif ("hod" in q or "head" in q) and ("bba" in q or "management" in q):
+        last_topic = "staff"
+        return "The HOD of Management (BBA) at Sindhi College is Dr. Sashikala U. (Vice Principal), MBA, PGDHRM, Ph.D."
+
+    elif ("hod" in q or "head" in q) and "english" in q:
+        last_topic = "staff"
+        return "The HOD of English at Sindhi College is Dr. K. Padmavathy (MA, M.Phil, LLB, NET, Ph.D)."
+
+    elif ("hod" in q or "head" in q) and "math" in q:
+        last_topic = "staff"
+        return "The HOD of Mathematics at Sindhi College is Dr. Roopa R. Anogod (M.Sc, M.Phil, Ph.D)."
+
+    elif "hod" in q or "head of department" in q:
+        last_topic = "staff"
+        return """Department Heads at Sindhi College:
+
+• Computer Science / BCA: Prof. Radhika E. K. and Prof. Priya Hari
+• Commerce: Prof. Jayashree Tambad and Dr. Kariyanna S.
+• Management (BBA): Dr. Sashikala U. (Vice Principal)
+• English: Dr. K. Padmavathy
+• Mathematics: Dr. Roopa R. Anogod
+• Physical Education & NCC: Lt. Shankara B. P. and Mrs. Prameela B. R."""
+
+    elif "principal" in q or "pricipal" in q or "head of college" in q:
+        last_topic = "principal"
+        return """The Principal of Sindhi College is Dr. Asha N.
+
+Qualifications: M.Com, MBA, M.Phil, Ph.D
+Designation: Principal"""
+
+    elif "vice principal" in q or "viceprincipal" in q:
+        last_topic = "staff"
+        return """The Vice Principal of Sindhi College is Dr. Sashikala U.
+
+Qualifications: MBA, PGDHRM, Ph.D
+Designation: Vice Principal"""
+
+    elif "librarian" in q or "library head" in q:
+        last_topic = "staff"
+        return """The Chief Librarian of Sindhi College is Mr. Devaraju S.
+
+Qualifications: MLISC, MA, M.Phil
+Designation: Chief Librarian"""
+
+    elif "research head" in q:
+        last_topic = "staff"
+        return "The Research Head of Sindhi College is Dr. Rajdeep Manwani (MBA, M.Com, M.Phil, Ph.D)."
+
+    elif "ncc" in q or "physical education" in q:
+        last_topic = "staff"
+        return """Physical Education & NCC at Sindhi College:
+
+• Lt. Shankara B. P. — Physical Education Director & NCC Officer (M.PEd)
+• Mrs. Prameela B. R. — Physical Education Director (MPEd, Ph.D)"""
+
+    elif "staff" in q or "faculty" in q or "professors" in q or "teachers" in q:
+        last_topic = "staff"
+        return """Sindhi College has a team of 60+ qualified faculty members.
+
+Key Staff:
+• Principal: Dr. Asha N (M.Com, MBA, M.Phil, Ph.D)
+• Vice Principal: Dr. Sashikala U (MBA, PGDHRM, Ph.D)
+• Chief Librarian: Mr. Devaraju S (MLISC, MA, M.Phil)
+
+The college has experienced professors, associate professors, and assistant professors across departments including Commerce, Computer Science, Management, Arts, and Sciences."""
+
+    # ---------- STUDENT FAQ ----------
     elif "python" in q:
         last_topic = "python"
         return "Python is a high-level programming language used for developing applications, websites, automation and data analysis."
@@ -202,61 +283,18 @@ It is a programming approach based on objects and classes."""
 
 It is an undergraduate degree related to computer applications and information technology."""
 
+    elif "govind" in q:
+        last_topic = "student"
+        return """Govind is a final-year BCA student at Sindhi College, Bengaluru.
+
+Class: BCA Final Year
+Academic Year: 2025-2026
+Role: Developer of this Sindhi College Chatbot project"""
+
     elif "hello" in q or "hi" in q or "hey" in q:
         return "Hello! 👋 Welcome to Sindhi College Chatbot. How can I help you?"
-    elif "principal" in q or "pricipal" in q or "head of college" in q:
-        last_topic = "principal"
-        return """The Principal of Sindhi College is Dr. Asha N.
-
-Qualifications: M.Com, MBA, M.Phil, Ph.D
-Designation: Principal"""
-    elif "vice principal" in q or "viceprincipal" in q or "vice principal" in q:
-        last_topic = "staff"
-        return """The Vice Principal of Sindhi College is Dr. Sashikala U.
-
-Qualifications: MBA, PGDHRM, Ph.D
-Designation: Vice Principal"""
-
-    elif "librarian" in q or "library head" in q:
-        last_topic = "staff"
-        return """The Chief Librarian of Sindhi College is Mr. Devaraju S.
-
-Qualifications: MLISC, MA, M.Phil
-Designation: Chief Librarian"""
-
-    elif "staff" in q or "faculty" in q or "professors" in q or "teachers" in q:
-        last_topic = "staff"
-        return """Sindhi College has a team of 60+ qualified faculty members.
-
-Key Staff:
-• Principal: Dr. Asha N (M.Com, MBA, M.Phil, Ph.D)
-• Vice Principal: Dr. Sashikala U (MBA, PGDHRM, Ph.D)
-• Chief Librarian: Mr. Devaraju S (MLISC, MA, M.Phil)
-
-The college has experienced professors, associate professors, and assistant professors across departments including Commerce, Computer Science, Management, Arts, and Sciences."""
 
     # If no FAQ answer matches, use AI
-    elif "hod" in q or "head of department" in q:
-        last_topic = "staff"
-        return """Department Heads at Sindhi College:
-
-• Computer Science / BCA: Prof. Radhika E. K. and Prof. Priya Hari
-• Commerce: Prof. Jayashree Tambad and Dr. Kariyanna S.
-• Management (BBA): Dr. Sashikala U. (Vice Principal)
-• English: Dr. K. Padmavathy
-• Mathematics: Dr. Roopa R. Anagod
-• Physical Education & NCC: Lt. Shankara B. P. and Mrs. Prameela B. R."""
-
-    elif "research head" in q:
-        last_topic = "staff"
-        return "The Research Head of Sindhi College is Dr. Rajdeep Manwani (MBA, M.Com, M.Phil, Ph.D)."
-
-    elif "ncc" in q or "physical education" in q:
-        last_topic = "staff"
-        return """Physical Education & NCC at Sindhi College:
-
-• Lt. Shankara B. P. — Physical Education Director & NCC Officer (M.PEd)
-• Mrs. Prameela B. R. — Physical Education Director (MPEd, Ph.D)"""
     else:
         return ask_ai(question)
 
@@ -284,6 +322,7 @@ def ask_ai(question):
         return response.choices[0].message.content
     except Exception:
         return "Sorry, I could not reach the AI service right now."
+
 
 # Test chatbot in PowerShell
 if __name__ == "__main__":

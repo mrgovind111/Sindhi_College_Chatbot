@@ -147,3 +147,12 @@ Highest Package: INR 7 LPA
 Average Package: INR 2 - 3 LPA
 Top Recruiters: EY, ICICI Bank, Wipro, Accenture, Decathlon, Amazon,
 Infosys, JP Morgan, Flipkart
+
+STUDENT INFORMATION
+-------------------
+Govind is a final-year BCA student at Sindhi College, Bengaluru.
+Register Number: U18IP24S0011
+Class: BCA Final Year
+Academic Year: 2024-2027
+
+Govind is the developer of this Sindhi College Chatbot project.

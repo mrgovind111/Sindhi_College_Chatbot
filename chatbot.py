@@ -236,6 +236,27 @@ Key Staff:
 The college has experienced professors, associate professors, and assistant professors across departments including Commerce, Computer Science, Management, Arts, and Sciences."""
 
     # If no FAQ answer matches, use AI
+    elif "hod" in q or "head of department" in q:
+        last_topic = "staff"
+        return """Department Heads at Sindhi College:
+
+• Computer Science / BCA: Prof. Radhika E. K. and Prof. Priya Hari
+• Commerce: Prof. Jayashree Tambad and Dr. Kariyanna S.
+• Management (BBA): Dr. Sashikala U. (Vice Principal)
+• English: Dr. K. Padmavathy
+• Mathematics: Dr. Roopa R. Anagod
+• Physical Education & NCC: Lt. Shankara B. P. and Mrs. Prameela B. R."""
+
+    elif "research head" in q:
+        last_topic = "staff"
+        return "The Research Head of Sindhi College is Dr. Rajdeep Manwani (MBA, M.Com, M.Phil, Ph.D)."
+
+    elif "ncc" in q or "physical education" in q:
+        last_topic = "staff"
+        return """Physical Education & NCC at Sindhi College:
+
+• Lt. Shankara B. P. — Physical Education Director & NCC Officer (M.PEd)
+• Mrs. Prameela B. R. — Physical Education Director (MPEd, Ph.D)"""
     else:
         return ask_ai(question)
 

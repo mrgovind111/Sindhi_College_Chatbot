@@ -47,24 +47,54 @@ Qualifications: MLISC, MA, M.Phil
 FACULTY AND STAFF LIST
 ----------------------
 1. Dr. Asha N - Principal - M.Com, MBA, M.Phil, Ph.D
-2. Dr. Sashikala U - Vice Principal - MBA, PGDHRM, Ph.D
+2. Dr. Sashikala U - Vice Principal & HOD (BBA) - MBA, PGDHRM, Ph.D
 3. Mr. Devaraju S - Chief Librarian - MLISC, MA, M.Phil
-4. Prof. Vaidyesh M A - Associate Professor - M.Com, MBA, M.Phil, MA (Eng)
-5. Dr. Kariyanna S - Professor & HOD - MA, B.Ed, NET, Ph.D
-6. Prof. Subrahmanya N R - Associate Professor & HOD - MA, B.Ed, Vidwath, SLET
-7. Prof. Radhika E K - Academic Coordinator & Associate Professor-HOD - MS (IT), (Ph.D)
-8. Lt. Shankara B P - Physical Education Director & NCC Officer - M.PEd
-9. Prof. Hemalatha R - Associate Professor & IQAC Coordinator - MCA, M.Phil
-10. Prof. Priya Hari - Associate Professor & Assistant HOD - MCA
-11. Dr. Ranjana Pillai - Faculty - MA, Ph.D
-12. Dr. Padmavathy K - Professor & HOD - MA, M.Phil, LLB, NET, Ph.D
-13. Prof. Jayashree Tambad - Associate Professor-HOD - M.Com, M.Phil
-14. Prof. Nandini S - Associate Professor & Assistant HOD - M.Com, M.Phil
-15. Dr. Rajdeep Manwani - Research Head - MBA, M.Com, M.Phil, Ph.D
-16. Dr. Roopa R Anagod - HOD & Administration Coordinator - M.Sc, M.Phil, Ph.D
-17. Prof. Kumar E - Assistant Professor & Assistant HOD - M.Com, NET, K-SET
-18. Mrs. Prameela B R - Physical Education Director - MPEd (Ph.D)
+4. Dr. Rajdeep Manwani - Research Head - MBA, M.Com, M.Phil, Ph.D
+5. Prof. Radhika E. K. - HOD (Computer Science & Electronics / BCA) & Associate Professor - MS (IT), (Ph.D)
+6. Prof. Priya Hari - HOD (BCA) & Associate Professor - MCA
+7. Prof. Hemalatha R. - Faculty (Computer Science) & IQAC Coordinator - MCA, M.Phil
+8. Prof. Jayashree Tambad - HOD (Commerce) & Associate Professor - M.Com, M.Phil
+9. Dr. Kariyanna S. - HOD (Commerce) & Professor - MA, B.Ed, NET, Ph.D
+10. Prof. Vaidyesh M. A. - Associate Professor (Management / BBA) - M.Com, MBA, M.Phil, MA (Eng)
+11. Prof. Prathima R. - Assistant Professor (Management / BBA) - [Qualifications]
+12. Prof. Sharath M. - Assistant Professor (Management / BBA) - [Qualifications]
+13. Dr. K. Padmavathy - HOD (English) & Professor - MA, M.Phil, LLB, NET, Ph.D
+14. Prof. R. Raheela Roohin - Assistant Professor (English) - [Qualifications]
+15. Dr. Roopa R. Anagod - HOD (Mathematics) & Associate Professor - M.Sc, M.Phil, Ph.D
+16. Lt. Shankara B. P. - Physical Education Director & NCC Officer - M.PEd
+17. Mrs. Prameela B. R. - Physical Education Director - MPEd (Ph.D)
+18. Prof. Subrahmanya N R - Associate Professor & HOD - MA, B.Ed, Vidwath, SLET
+19. Prof. Nandini S - Associate Professor & Assistant HOD - M.Com, M.Phil
+20. Prof. Kumar E - Assistant Professor & Assistant HOD - M.Com, NET, K-SET
 
+
+DEPARTMENT HEADS (Quick Reference)
+----------------------------------
+Computer Science & Electronics / BCA:
+  - HOD: Prof. Radhika E. K.
+  - HOD: Prof. Priya Hari
+  - Faculty: Prof. Hemalatha R.
+
+Commerce:
+  - HOD: Prof. Jayashree Tambad
+  - HOD: Dr. Kariyanna S.
+
+Management (BBA):
+  - HOD: Prof. Sashikala U. (Vice Principal)
+  - Associate Professor: Prof. Vaidyesh M. A.
+  - Assistant Professor: Prof. Prathima R.
+  - Assistant Professor: Prof. Sharath M.
+
+English:
+  - HOD: Dr. K. Padmavathy
+  - Assistant Professor: Prof. R. Raheela Roohin
+
+Mathematics:
+  - HOD: Dr. Roopa R. Anagod
+
+Physical Education & NCC:
+  - Director & NCC Officer: Lt. Shankara B. P.
+  - Director: Mrs. Prameela B. R.
 
 COURSES OFFERED
 ---------------
